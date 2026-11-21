@@ -2,7 +2,7 @@
 
 > **Demo-Firma, fiktive Daten.** Die Häuserhofer Haustechnik GmbH existiert nicht. Alle Personen, Kunden, Zahlen und Dokumente sind erfunden. Ähnlichkeiten mit echten Firmen oder Personen sind nicht beabsichtigt.
 
-Diese Umgebung gehört zum YouTube-Kanal **„Sinan Uçar | Lokale KI für Firmen“**. Alles, was in den Videos gezeigt wird, läuft hier vorher wirklich. Du kannst es auf deinem eigenen Rechner nachbauen.
+Diese Umgebung gehört zum YouTube-Kanal **„Sinan Uçar | KI für Unternehmen“**. Alles, was in den Videos gezeigt wird, läuft hier vorher wirklich. Du kannst es auf deinem eigenen Rechner nachbauen.
 
 ## Die Firma in einem Satz
 
@@ -70,4 +70,4 @@ Anmeldung in Open WebUI und paperless-ngx mit den Demo-Zugangsdaten aus `.env` (
 
 Code: MIT (siehe `LICENSE`). Demo-Daten und Texte in `docs/`: CC BY 4.0.
 
-Zum Kanal: YouTube „Sinan Uçar | Lokale KI für Firmen“ · Beratung: [filandmuz.com](https://filandmuz.com)
+Zum Kanal: YouTube „Sinan Uçar | KI für Unternehmen“ · Beratung: [filandmuz.com](https://filandmuz.com)
