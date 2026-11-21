@@ -1,4 +1,4 @@
-# demo-firma: Häuserhofer Haustechnik GmbH
+# haeuserhofer-haustechnik: Häuserhofer Haustechnik GmbH
 
 > **Demo-Firma, fiktive Daten.** Die Häuserhofer Haustechnik GmbH existiert nicht. Alle Personen, Kunden, Zahlen und Dokumente sind erfunden. Ähnlichkeiten mit echten Firmen oder Personen sind nicht beabsichtigt.
 
