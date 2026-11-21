@@ -1,0 +1,126 @@
+# Demo-Umgebung der Häuserhofer Haustechnik GmbH (Demo-Firma, fiktive Daten)
+#
+# Ollama läuft NICHT hier, sondern nativ auf macOS (sonst keine Apple-GPU).
+# Open WebUI erreicht es über host.docker.internal:11434.
+#
+# Start:  make up      Alles neu mit Demo-Daten:  make reset      Prüfen:  make test
+
+name: haeuserhofer-demo
+
+services:
+  open-webui:
+    image: ${OPEN_WEBUI_IMAGE:-ghcr.io/open-webui/open-webui:v0.13.4}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${OPEN_WEBUI_PORT:-3000}:8080"
+    environment:
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      WEBUI_NAME: "Häuserhofer-Assistent (Demo)"
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY:?WEBUI_SECRET_KEY in .env setzen}
+      DEFAULT_LOCALE: de-DE
+      ENABLE_SIGNUP: "true"
+      DEFAULT_USER_ROLE: user
+      ENABLE_OPENAI_API: "false"
+      ANONYMIZED_TELEMETRY: "false"
+      DO_NOT_TRACK: "true"
+      SCARF_NO_ANALYTICS: "true"
+      RAG_EMBEDDING_ENGINE: ollama
+      RAG_EMBEDDING_MODEL: ${EMBEDDING_MODEL:-bge-m3}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui:/app/backend/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  paperless-db:
+    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: ${PAPERLESS_DB_PASSWORD:?PAPERLESS_DB_PASSWORD in .env setzen}
+    volumes:
+      - paperless-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paperless -d paperless"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  paperless-redis:
+    image: ${REDIS_IMAGE:-redis:7-alpine}
+    restart: unless-stopped
+    volumes:
+      - paperless-redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  paperless:
+    image: ${PAPERLESS_IMAGE:-ghcr.io/paperless-ngx/paperless-ngx:3.5.1}
+    restart: unless-stopped
+    depends_on:
+      paperless-db:
+        condition: service_healthy
+      paperless-redis:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${PAPERLESS_PORT:-8000}:8000"
+    environment:
+      PAPERLESS_REDIS: redis://paperless-redis:6379
+      PAPERLESS_DBHOST: paperless-db
+      PAPERLESS_DBPASS: ${PAPERLESS_DB_PASSWORD}
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY:?PAPERLESS_SECRET_KEY in .env setzen}
+      PAPERLESS_ADMIN_USER: ${DEMO_ADMIN_USER:-demo}
+      PAPERLESS_ADMIN_PASSWORD: ${DEMO_ADMIN_PASSWORD:?DEMO_ADMIN_PASSWORD in .env setzen}
+      PAPERLESS_ADMIN_MAIL: ${DEMO_ADMIN_EMAIL:-admin@haeuserhofer.example}
+      PAPERLESS_URL: http://localhost:${PAPERLESS_PORT:-8000}
+      PAPERLESS_OCR_LANGUAGE: deu
+      PAPERLESS_TIME_ZONE: Europe/Berlin
+      PAPERLESS_TASK_WORKERS: 2
+      PAPERLESS_ENABLE_UPDATE_CHECK: "false"
+      PAPERLESS_BIND_ADDR: 0.0.0.0
+    volumes:
+      - paperless-data:/usr/src/paperless/data
+      - paperless-media:/usr/src/paperless/media
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8000/api/ -o /dev/null -w '%{http_code}' | grep -qE '^(2..|3..|401|403)$$'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  mailpit:
+    image: ${MAILPIT_IMAGE:-axllent/mailpit:v1.34.0}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${MAILPIT_WEB_PORT:-8025}:8025"
+      - "127.0.0.1:${MAILPIT_SMTP_PORT:-1025}:1025"
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_UI_TITLE: "Häuserhofer Postfach (Demo)"
+      MP_SMTP_AUTH_ACCEPT_ANY: "true"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "true"
+      MP_DATABASE: /data/mailpit.db
+    volumes:
+      - mailpit:/data
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  open-webui:
+  paperless-db:
+  paperless-redis:
+  paperless-data:
+  paperless-media:
+  mailpit:

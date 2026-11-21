@@ -1,0 +1,46 @@
+{
+  "_hinweis": "Demo-Firma, fiktive Daten. Quelle: Firmenbibel v0.1 (21.11.2026). Die Häuserhofer Haustechnik GmbH existiert nicht.",
+  "name": "Häuserhofer Haustechnik GmbH",
+  "kurz": "Häuserhofer",
+  "domain": "haeuserhofer.example",
+  "gegruendet": 1987,
+  "gmbh_seit": 2004,
+  "geschaeftsfuehrer": "Werner Häuserhofer",
+  "prokuristin": "Julia Häuserhofer",
+  "beschaeftigte": 46,
+  "azubis": 4,
+  "umsatz_2025_eur": 6400000,
+  "umsatz_plan_2026_eur": 6800000,
+  "wartungsvertraege_gesamt": 1900,
+  "einsatzgebiet_km": 40,
+  "adresse": {
+    "strasse": "Am Demohang 1",
+    "plz": "00100",
+    "ort": "Musterstadt (fiktiv)"
+  },
+  "telefon": "0000 000000-0",
+  "iban": "DE00 0000 0000 0000 0000 00",
+  "ust_id": "DE000000000",
+  "sammelpostfaecher": ["info", "service", "rechnung", "angebote", "bewerbung", "einkauf"],
+  "personas": [
+    {"vorname": "Werner", "nachname": "Häuserhofer", "jahrgang": 1961, "abteilung": "Geschäftsführung", "rolle": "Geschäftsführer"},
+    {"vorname": "Julia", "nachname": "Häuserhofer", "jahrgang": 1990, "abteilung": "Geschäftsführung", "rolle": "Prokuristin, Vertrieb, Digitalisierung"},
+    {"vorname": "Petra", "nachname": "Hoffmann", "jahrgang": 1972, "abteilung": "Büro", "rolle": "Büroleitung"},
+    {"vorname": "Murat", "nachname": "Demir", "jahrgang": 1984, "abteilung": "Kundendienst", "rolle": "Kundendienstleiter"},
+    {"vorname": "Klaus", "nachname": "Wagner", "jahrgang": 1962, "abteilung": "Werkstatt Wärmepumpen-Pakete", "rolle": "Werkstattleiter"},
+    {"vorname": "Jonas", "nachname": "Becker", "jahrgang": 1995, "abteilung": "IT", "rolle": "IT (Teilzeit 20 h)"},
+    {"vorname": "Lea", "nachname": "Schmidt", "jahrgang": 2008, "abteilung": "Azubis", "rolle": "Auszubildende Anlagenmechanikerin SHK, 1. Lehrjahr"}
+  ],
+  "abteilungen": [
+    {"name": "Geschäftsführung", "anzahl": 2},
+    {"name": "Büro", "anzahl": 5, "rollen": ["Büroleitung", "Buchhaltung", "Angebote", "Disposition", "Empfang"]},
+    {"name": "Projektleitung Montage", "anzahl": 2, "rollen": ["Projektleiter"]},
+    {"name": "Montage", "anzahl": 14, "rollen": ["Monteur"]},
+    {"name": "Kundendienst", "anzahl": 11, "rollen": ["Kundendienstleiter", "Servicetechniker"]},
+    {"name": "Werkstatt Wärmepumpen-Pakete", "anzahl": 5, "rollen": ["Werkstattleiter", "Werkstattmonteur"]},
+    {"name": "Lager und Einkauf", "anzahl": 2, "rollen": ["Lager", "Einkauf"]},
+    {"name": "IT", "anzahl": 1},
+    {"name": "Azubis", "anzahl": 4, "rollen": ["Auszubildende/r Anlagenmechaniker/in SHK"]}
+  ],
+  "kundenmix": {"privat": 0.60, "wohnungswirtschaft": 0.25, "betriebe": 0.15}
+}
