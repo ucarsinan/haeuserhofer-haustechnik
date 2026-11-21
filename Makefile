@@ -15,13 +15,13 @@ COMPOSE  := docker compose
 CHAT_MODEL      ?= gemma3:12b
 EMBEDDING_MODEL ?= bge-m3
 
-.PHONY: help setup models data up down load reset test test-ki logs status clean
+.PHONY: help check-env setup models data up down load reset test test-ki logs status clean
 
 help: ## Diese Hilfe
 	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-9s %s\n", $$1, $$2}'
 
-.env:
-	@echo "FEHLER: .env fehlt. Anlegen mit: cp .env.example .env (und Werte prüfen)"; exit 1
+check-env:
+	@test -f .env || { echo "FEHLER: .env fehlt. Anlegen mit: cp .env.example .env (und Werte prüfen)"; exit 1; }
 
 $(VENV)/.ok: requirements.txt
 	$(PYTHON) -m venv $(VENV)
@@ -29,7 +29,7 @@ $(VENV)/.ok: requirements.txt
 	$(PY) -m pip install -q -r requirements.txt
 	@touch $@
 
-setup: .env $(VENV)/.ok ## Python-Umgebung anlegen
+setup: check-env $(VENV)/.ok ## Python-Umgebung anlegen
 
 models: ## Ollama-Modelle laden (Ollama läuft nativ auf macOS)
 	@command -v ollama >/dev/null || { echo "FEHLER: ollama nicht installiert (https://ollama.com/download)"; exit 1; }
@@ -39,25 +39,25 @@ models: ## Ollama-Modelle laden (Ollama läuft nativ auf macOS)
 data: $(VENV)/.ok ## Demo-Daten erzeugen (SEED=2026 STICHTAG=YYYY-MM-DD)
 	$(PY) seed/generate.py --out $(DATA) --seed $(SEED) --stichtag $(STICHTAG)
 
-up: .env ## Dienste starten
+up: check-env ## Dienste starten
 	$(COMPOSE) up -d --wait
 
 down: ## Dienste stoppen (Daten bleiben)
 	$(COMPOSE) down
 
-load: .env $(VENV)/.ok ## Demo-Daten in die Dienste laden
+load: check-env $(VENV)/.ok ## Demo-Daten in die Dienste laden
 	$(PY) seed/load.py --data $(DATA)
 
-reset: .env $(VENV)/.ok ## ALLES löschen, neu starten, Demo-Daten laden (vor jeder Aufnahme)
+reset: check-env $(VENV)/.ok ## ALLES löschen, neu starten, Demo-Daten laden (vor jeder Aufnahme)
 	$(COMPOSE) down -v --remove-orphans
 	$(MAKE) data
 	$(COMPOSE) up -d --wait
 	$(MAKE) load
 
-test: .env $(VENV)/.ok ## Prüfen, ob alles bereit ist
+test: check-env $(VENV)/.ok ## Prüfen, ob alles bereit ist
 	$(PY) scripts/test.py --data $(DATA)
 
-test-ki: .env $(VENV)/.ok ## Wie test, plus Demo-Fragen an das lokale Modell
+test-ki: check-env $(VENV)/.ok ## Wie test, plus Demo-Fragen an das lokale Modell
 	$(PY) scripts/test.py --data $(DATA) --ki
 
 logs: ## Logs aller Dienste
