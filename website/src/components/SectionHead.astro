@@ -1,0 +1,9 @@
+---
+interface Props { label: string; title: string; lead?: string; onNavy?: boolean; id?: string }
+const { label, title, lead, onNavy = false, id } = Astro.props;
+---
+<div class="head">
+  <p class:list={['label', { 'label--on-navy': onNavy }]}>{label}</p>
+  <h2 class="h2" id={id}>{title}</h2>
+  {lead && <p class="lead">{lead}</p>}
+</div>

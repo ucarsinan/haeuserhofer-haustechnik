@@ -1,0 +1,9 @@
+---
+interface Props { negativ?: boolean; href?: string }
+const { negativ = false, href = '/' } = Astro.props;
+const door = negativ ? 'var(--signal-on-navy)' : 'var(--signal)';
+---
+<a class:list={['logo', { 'logo--negativ': negativ }]} href={href} aria-label="Häuserhofer Haustechnik GmbH, zur Startseite">
+  <svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="2"></rect><path d="M8 24V12l9-5 9 5v12"></path><path d="M13 24v-6h8v6" stroke={door}></path></svg>
+  <span class="logo__name"><b>Häuserhofer</b><span>Haustechnik GmbH</span></span>
+</a>

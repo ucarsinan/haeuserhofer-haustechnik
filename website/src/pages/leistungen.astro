@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { services, emergency } from '../data/site';
+---
+<Base title="Leistungen" description="Heizung und Wärmepumpe, Lüftung, Bad, Kundendienst und Wartung, Notdienst von Oktober bis April.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <p class="label">Leistungen</p>
+      <h1 class="h1 h1--page" id="title">Was wir für Sie bauen und warten</h1>
+      <p class="lead">Rund die Hälfte unserer Arbeit sind Montage und Projekte, ein Drittel Kundendienst und Wartung. Wir arbeiten für private Hausbesitzer, Wohnungsgesellschaften, Hausverwaltungen und andere Handwerksbetriebe im Umkreis von etwa 40 km.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    {services.map((s) => (
+      <section class="service" id={s.id} aria-labelledby={`${s.id}-title`}>
+        <div class="service__text">
+          <div class="service__title"><span class="icon"><Icon name={s.icon} /></span><p class="label" style="margin: 0">{s.label}</p></div>
+          <h2 class="h2" id={`${s.id}-title`}>{s.title}</h2>
+          <p class="lead">{s.text}</p>
+          <ul class="checklist">{s.points.map((p) => <li>{p}</li>)}</ul>
+        </div>
+        <Photo class="service__media" ratio="43" alt={s.photo.alt} caption={s.photo.caption} />
+      </section>
+    ))}
+  </div>
+
+  <section class="section--navy" aria-labelledby="notdienst">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-7">
+          <div class="service__title"><span class="icon" style="border-color: var(--navy-line); color: var(--on-navy)"><Icon name="siren" /></span><p class="label label--on-navy" style="margin: 0">{emergency.label}</p></div>
+          <h2 class="h2" id="notdienst">{emergency.title}</h2>
+          <p class="lead" style="color: var(--on-navy-muted)">{emergency.text}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="kunden">
+    <div class="wrap">
+      <SectionHead id="kunden" label="Für wen" title="Unsere Kunden" />
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th scope="col">Kundengruppe</th><th scope="col">Anteil</th><th scope="col">Typische Aufträge</th></tr></thead>
+          <tbody>
+            <tr><td>Private Hausbesitzer</td><td class="num">ca. 60 %</td><td>Heizungstausch, Wärmepumpe, Bad, Wartung</td></tr>
+            <tr><td>Wohnungsgesellschaften und Hausverwaltungen</td><td class="num">ca. 25 %</td><td>Wartung, Störungsdienst, Sanierung</td></tr>
+            <tr><td>Andere Handwerksbetriebe</td><td class="num">ca. 15 %</td><td>Hydraulik-Pakete, Ersatzteile</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Base>

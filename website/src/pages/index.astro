@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Quote from '../components/Quote.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import { stats, services, process, people, history } from '../data/site';
+---
+<Base title="Start" description="Planung, Einbau und Wartung von Heizung, Wärmepumpe, Lüftung und Bad im Umkreis von 40 km.">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="hero__text">
+          <p class="label label--muted">Meisterbetrieb · Heizung · Sanitär · Lüftung</p>
+          <h1 class="h1" id="hero-title">Heizung, Wärmepumpe, Bad. Seit 1987.</h1>
+          <p class="lead">Planung, Einbau und Wartung von Haustechnik. Für Hausbesitzer, Hausverwaltungen und andere Betriebe im Umkreis von 40 km.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/leistungen/">Leistungen ansehen</a>
+            <a class="btn btn--secondary" href="/so-arbeiten-wir/">So arbeiten wir</a>
+          </div>
+        </div>
+        <Photo class="hero__photo" person caption="Teamfoto · vor der Halle im Gewerbegebiet" hint="Teamfoto folgt" alt="Platzhalter Teamfoto: die sieben Hauptpersonen in Arbeitskleidung vor der Firmenhalle mit Firmenschild, Werner und Julia Häuserhofer in der Mitte, dahinter unscharf weitere Mitarbeitende und zwei Servicewagen. KI-generiert, Demo-Firma" />
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Zahlen">
+    <div class="wrap">
+      <dl class="stats">
+        {stats.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="leistungen">
+    <div class="wrap">
+      <SectionHead id="leistungen" label="Leistungen" title="Vier Bereiche, ein Betrieb" />
+      <div class="cards cards--4">
+        {services.map((s) => (
+          <article class="card">
+            <span class="icon"><Icon name={s.icon} /></span>
+            <h3 class="h3">{s.label}</h3>
+            <p>{s.short}</p>
+            <a class="link-arrow" href={`/leistungen/#${s.id}`}>Mehr dazu <span class="sr-only">zu {s.label}</span><span aria-hidden="true">→</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Quote />
+
+  <section class="section" aria-labelledby="ablauf">
+    <div class="wrap">
+      <SectionHead id="ablauf" label="So arbeiten wir" title="Von der Anfrage bis zur Wartung" />
+      <ol class="steps steps--row">
+        {process.map((p) => <li><div><b>{p.title}</b><span class="step__text">{p.text}</span><span class="step__meta">{p.meta}</span></div></li>)}
+      </ol>
+      <a class="link-arrow" style="margin-top: 16px" href="/so-arbeiten-wir/">Ablauf im Detail <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="team">
+    <div class="wrap">
+      <SectionHead id="team" label="Team" title="Die Leute hinter der Anlage" lead="46 Beschäftigte, davon 4 Auszubildende. Hier ein Teil von ihnen." />
+      <ul class="people people--compact" style="list-style: none; margin: 0; padding: 0;">
+        {people.map((p) => (
+          <li class="person">
+            <Photo ratio="11" person badge="KI" hint="" alt={p.photoAlt} />
+            <span><span class="person__name">{p.name}</span><br /><span class="person__role">{p.role}</span></span>
+          </li>
+        ))}
+      </ul>
+      <a class="link-arrow" style="margin-top: 16px" href="/team/">Alle im Team <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="betriebe">
+    <div class="wrap">
+      <div class="grid-12 grid-12--top">
+        <div class="spec col-7">
+          <p class="label label--on-navy">Für Betriebe · H1 / H2</p>
+          <h2 class="h3" id="betriebe">Vormontierte Hydraulik-Pakete aus eigener Werkstatt</h2>
+          <p>Für andere Heizungsbauer: fertig vormontiert und auf dem eigenen Prüfstand getestet.</p>
+          <dl>
+            <div><dt>VARIANTEN</dt><dd>H1 und H2</dd></div>
+            <div><dt>BEZIEHER</dt><dd>rund 35 Betriebe</dd></div>
+          </dl>
+          <a class="link-arrow" href="/fuer-betriebe/">Mehr für Betriebe <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="col-5">
+          <p class="label">Geschichte</p>
+          <h2 class="h3" style="margin-bottom: 14px">Angefangen in einer Garage</h2>
+          <div class="timeline">
+            {history.filter((h) => ['1987', '1995', '2018', '2026'].includes(h.year)).map((h) => <div><b>{h.year}</b><span>{h.text}</span></div>)}
+          </div>
+          <a class="link-arrow" href="/ueber-uns/">Mehr über uns <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Hinweis">
+    <div class="wrap"><Disclaimer /></div>
+  </section>
+</Base>

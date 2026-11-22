@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Photo from '../components/Photo.astro';
+import { process, emergency } from '../data/site';
+---
+<Base title="So arbeiten wir" description="Von der Anfrage über Vor-Ort-Termin, Angebot und Montage bis zur Wartung. So läuft ein Auftrag bei uns.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <p class="label">So arbeiten wir</p>
+      <h1 class="h1 h1--page" id="title">Von der Anfrage bis zur Wartung</h1>
+      <p class="lead">So läuft ein Auftrag bei uns ab, Schritt für Schritt. Damit Sie wissen, was als Nächstes passiert.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="montage">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-6">
+          <SectionHead id="montage" label="Montage und Projekte" title="Neue Anlage in fünf Schritten" />
+          <ol class="steps">
+            {process.map((p) => <li><div><b>{p.title}</b><span class="step__text">{p.text}</span><span class="step__meta">{p.meta}</span></div></li>)}
+          </ol>
+        </div>
+        <Photo class="col-5 col-7-off" ratio="45" caption="Vor-Ort-Termin · Aufmaß im Heizraum" alt="Platzhalter Foto: Projektleiter nimmt im Heizraum eines Wohnhauses Maß, Klemmbrett in der Hand, KI-generiert" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section--band" aria-labelledby="stoerung">
+    <div class="wrap">
+      <SectionHead id="stoerung" label="Kundendienst" title="Wenn die Heizung streikt" />
+      <ol class="steps steps--row">
+        <li><div><b>Anruf</b><span class="step__text">Sie melden die Störung. Unsere Disposition nimmt sie auf.</span><span class="step__meta">Im Winter bis zu 40 am Tag</span></div></li>
+        <li><div><b>Einsatz</b><span class="step__text">Ein Servicetechniker bekommt Adresse und Fehlerbild und fährt los.</span></div></li>
+        <li><div><b>Reparatur</b><span class="step__text">Der Techniker repariert vor Ort und dokumentiert, was er gemacht hat.</span></div></li>
+        <li><div><b>Rechnung</b><span class="step__text">Sie bekommen die Rechnung per Post oder E-Mail.</span></div></li>
+      </ol>
+      <div style="margin-top: 32px; display: flex; gap: 12px; align-items: flex-start; max-width: 65ch">
+        <span class="icon" style="color: var(--navy)"><Icon name="siren" /></span>
+        <p><b>{emergency.label}:</b> {emergency.text}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="wartung">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-6">
+          <SectionHead id="wartung" label="Wartung" title="Wartungsvertrag" lead="Rund 1.900 Anlagen betreuen wir mit Wartungsvertrag. Die meisten Wartungen machen wir von September bis November, bevor die Heizsaison richtig beginnt." />
+        </div>
+        <div class="col-6-off">
+          <dl class="facts">
+            <div><dt>Erinnerung</dt><dd>per Brief oder E-Mail, wenn die Wartung fällig ist</dd></div>
+            <div><dt>Termin</dt><dd>telefonisch vereinbart</dd></div>
+            <div><dt>Hauptsaison</dt><dd>September bis November</dd></div>
+            <div><dt>Nachweis</dt><dd>Wartungsprotokoll zu jedem Termin</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

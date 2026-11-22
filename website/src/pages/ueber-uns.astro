@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Quote from '../components/Quote.astro';
+import { history } from '../data/site';
+---
+<Base title="Über uns" description="Seit 1987 Meisterbetrieb für Haustechnik. Gegründet in einer Garage, heute 46 Beschäftigte in zweiter Generation.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <p class="label">Über uns</p>
+      <h1 class="h1 h1--page" id="title">Ein Familienbetrieb seit 1987</h1>
+      <p class="lead">Angefangen hat Werner Häuserhofer allein, in der Garage seiner Eltern. Heute sind wir 46 Leute mit eigener Halle, Werkstatt und 22 Fahrzeugen. 2029 übernimmt seine Tochter Julia.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="geschichte">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-4"><SectionHead id="geschichte" label="Geschichte" title="Von der Garage zur Halle" /></div>
+        <div class="col-7-off timeline">
+          {history.map((h) => <div><b>{h.year}</b><span>{h.text}</span></div>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Quote />
+
+  <section class="section" aria-labelledby="fuehrung">
+    <div class="wrap">
+      <SectionHead id="fuehrung" label="Führung" title="Zwei Generationen" />
+      <div class="grid-12">
+        <article class="col-6 person">
+          <Photo ratio="43" person alt="Platzhalter Porträt Werner Häuserhofer im Büro vor gerahmter Meisterurkunde, KI-generiert" />
+          <span class="person__name">Werner Häuserhofer</span>
+          <span class="person__role">Gründer und Geschäftsführer</span>
+          <p class="person__text">Meister seit 1986, Gründer 1987. Entscheidet, wie der Betrieb investiert, und will ihn gesund an die nächste Generation übergeben.</p>
+        </article>
+        <article class="col-6 person">
+          <Photo ratio="43" person alt="Platzhalter Porträt Julia Häuserhofer am Whiteboard in ihrem Büro, KI-generiert" />
+          <span class="person__name">Julia Häuserhofer</span>
+          <span class="person__role">Prokuristin, Vertrieb</span>
+          <p class="person__text">Wirtschaftsingenieurin, vorher vier Jahre bei einem Heizungsgroßhändler. Seit 2015 im Betrieb, verantwortlich für Vertrieb und Digitalisierung.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="standort">
+    <div class="wrap">
+      <SectionHead id="standort" label="Standort" title="Halle, Werkstatt, Hof" lead="Unser Betrieb liegt im Gewerbegebiet am Ortsrand einer Kreisstadt in Süddeutschland." />
+      <div class="cards cards--4">
+        <article class="card"><span class="icon"><Icon name="users" /></span><h3 class="h3">Büro</h3><p>Empfang, Großraumbüro und Besprechungsraum mit kleiner Bad-Ausstellung.</p></article>
+        <article class="card"><span class="icon"><Icon name="box" /></span><h3 class="h3">Lager</h3><p>Rund 2.800 Artikel, mit Ausgabe für Monteure und Kunden.</p></article>
+        <article class="card"><span class="icon"><Icon name="package" /></span><h3 class="h3">Werkstatt</h3><p>Fünf Arbeitsplätze und ein Prüfstand für die Hydraulik-Pakete.</p></article>
+        <article class="card"><span class="icon"><Icon name="truck" /></span><h3 class="h3">Fuhrpark</h3><p>22 Fahrzeuge, darunter 7 Montagewagen und 10 Servicewagen.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="mitglied">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-6">
+          <div class="service__title"><span class="icon"><Icon name="award" /></span><p class="label" style="margin: 0">Meisterbetrieb</p></div>
+          <h2 class="h2" id="mitglied">Meisterbetrieb und Innungsmitglied</h2>
+          <p class="lead">Wir sind eingetragener Meisterbetrieb und Mitglied der SHK-Innung. Wir bilden aus, derzeit vier Auszubildende.</p>
+        </div>
+        <Photo class="col-6-off" ratio="32" caption="Hof · Servicewagen am Morgen" alt="Platzhalter Foto: Firmenhof am frühen Morgen mit weißen Servicewagen mit dunkelblauem Band, ohne erkennbare Gesichter, KI-generiert" />
+      </div>
+    </div>
+  </section>
+</Base>
