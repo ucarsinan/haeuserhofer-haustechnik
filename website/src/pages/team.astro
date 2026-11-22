@@ -19,17 +19,17 @@ const total = departments.reduce((n, d) => n + d.count, 0);
       <ul class="people people--lead" style="list-style: none; margin: 0; padding: 0;">
         {people.slice(0, 2).map((p) => (
           <li class="person">
-            <Photo ratio="43" person alt={p.photoAlt} />
+            <Photo ratio="43" person src={p.photo} position="50% 25%" alt={p.photoAlt} />
             <span class="person__since">{p.since}</span>
             <span><span class="person__name">{p.name}</span><br /><span class="person__role">{p.role}</span></span>
             <p class="person__text">{p.text}</p>
           </li>
         ))}
       </ul>
-      <ul class="people people--rest" style="list-style: none; margin: 0; padding: 0;">
+      <ul class="people people--rest" style="list-style: none; margin: 40px 0 0; padding: 0;">
         {people.slice(2).map((p) => (
           <li class="person">
-            <Photo ratio="45" person alt={p.photoAlt} />
+            <Photo ratio="45" person src={p.photo} position="50% 20%" alt={p.photoAlt} />
             <span class="person__since">{p.since}</span>
             <span><span class="person__name">{p.name}</span><br /><span class="person__role">{p.role}</span></span>
             <p class="person__text">{p.text}</p>

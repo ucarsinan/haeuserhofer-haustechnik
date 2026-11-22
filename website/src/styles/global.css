@@ -273,3 +273,7 @@ p { margin: 0; }
 .people + .people { margin-top: 40px; }
 @media (min-width: 640px) { .people--lead { grid-template-columns: repeat(2, minmax(0, 1fr)); } .people--rest { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1060px) { .people--lead { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); } .people--rest { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-6); } }
+
+/* "Unser KI-Weg": phase label above each stage, link once the episode is out. */
+.kiweg .kiweg__label { margin: 0 0 4px; color: var(--signal); }
+.kiweg .kiweg__link { margin-top: 8px; display: inline-flex; }

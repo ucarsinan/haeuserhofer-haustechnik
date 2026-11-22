@@ -18,6 +18,7 @@ export const nav = [
   { href: '/ueber-uns/', label: 'Über uns' },
   { href: '/team/', label: 'Team' },
   { href: '/so-arbeiten-wir/', label: 'So arbeiten wir' },
+  { href: '/ki-weg/', label: 'KI-Weg' },
   { href: '/kontakt/', label: 'Kontakt' },
 ];
 
@@ -81,12 +82,14 @@ export const history = [
 
 export type Person = {
   slug: string; name: string; role: string; since: string; text: string; photoAlt: string;
+  /** Generated portrait under public/images/; without it the slot shows a placeholder. */
+  photo?: string;
 };
 
 export const people: Person[] = [
-  { slug: 'werner', name: 'Werner Häuserhofer', role: 'Gründer und Geschäftsführer', since: 'seit 1987', text: 'Hat den Betrieb in der Garage seiner Eltern gegründet. Steht jeden Morgen als Erster auf dem Hof.', photoAlt: 'Platzhalter Porträt Werner Häuserhofer, 65, graues kurzes Haar, Schnauzer, Fleeceweste, KI-generiert' },
-  { slug: 'julia', name: 'Julia Häuserhofer', role: 'Prokuristin, Vertrieb', since: 'seit 2015', text: 'Wirtschaftsingenieurin. Kümmert sich um Vertrieb und darum, dass der Betrieb mit der Zeit geht. Übernimmt 2029.', photoAlt: 'Platzhalter Porträt Julia Häuserhofer, 36, dunkelblondes Haar im Zopf, dunkelblauer Blazer, KI-generiert' },
-  { slug: 'petra', name: 'Petra Hoffmann', role: 'Büroleitung', since: 'seit 1998', text: 'Kennt fast jeden Kunden beim Namen und weiß, wo was liegt.', photoAlt: 'Platzhalter Porträt Petra Hoffmann, 54, kurze rotbraune Haare, Strickjacke, KI-generiert' },
+  { slug: 'werner', name: 'Werner Häuserhofer', role: 'Gründer und Geschäftsführer', since: 'seit 1987', text: 'Hat den Betrieb in der Garage seiner Eltern gegründet. Steht jeden Morgen als Erster auf dem Hof.', photoAlt: 'Porträt Werner Häuserhofer, 65, graues Haar, Schnauzer, Lesebrille im Haar, dunkelblaue Fleeceweste, im Büro. KI-generiert', photo: '/images/werner-portrait-640.webp' },
+  { slug: 'julia', name: 'Julia Häuserhofer', role: 'Prokuristin, Vertrieb', since: 'seit 2015', text: 'Wirtschaftsingenieurin. Kümmert sich um Vertrieb und darum, dass der Betrieb mit der Zeit geht. Übernimmt 2029.', photoAlt: 'Porträt Julia Häuserhofer, 36, dunkelblondes Haar im Zopf, dunkelblauer Blazer, im Büro. KI-generiert', photo: '/images/julia-portrait-640.webp' },
+  { slug: 'petra', name: 'Petra Hoffmann', role: 'Büroleitung', since: 'seit 1998', text: 'Kennt fast jeden Kunden beim Namen und weiß, wo was liegt.', photoAlt: 'Porträt Petra Hoffmann, 54, kurze rotbraune Haare, weinrote Strickjacke, im Großraumbüro. KI-generiert', photo: '/images/petra-portrait-640.webp' },
   { slug: 'murat', name: 'Murat Demir', role: 'Leitung Kundendienst', since: 'seit 2009', text: 'Meister SHK. Plant Wartung und Störungsdienst für zehn Servicetechniker.', photoAlt: 'Platzhalter Porträt Murat Demir, 42, kurze schwarze Haare, kurzer Vollbart, Softshelljacke, KI-generiert' },
   { slug: 'klaus', name: 'Klaus Wagner', role: 'Leitung Werkstatt', since: 'Altmeister', text: 'Hat die Hydraulik-Pakete erfunden. Was er nicht über Heizungshydraulik weiß, muss man nicht wissen.', photoAlt: 'Platzhalter Porträt Klaus Wagner, 64, fast kahl, buschige Augenbrauen, Latzhose, KI-generiert' },
   { slug: 'jonas', name: 'Jonas Becker', role: 'IT', since: 'seit 2021', text: 'Sorgt in Teilzeit dafür, dass Server, Telefone und Tablets laufen.', photoAlt: 'Platzhalter Porträt Jonas Becker, 31, wuschelige braune Haare, runde Brille, Hoodie, KI-generiert' },
@@ -111,4 +114,20 @@ export const process = [
   { title: 'Angebot', text: 'Sie bekommen ein schriftliches Angebot.', meta: 'In 2 bis 5 Arbeitstagen' },
   { title: 'Montage', text: 'Ein eingespieltes Zweier-Team baut ein. Die Projektleitung bleibt Ihr Ansprechpartner.', meta: 'Teams zu zweit' },
   { title: 'Wartung', text: 'Wir erinnern Sie, wenn die Wartung fällig ist, und kommen mit Messgerät und Protokoll.', meta: 'Mit Wartungsvertrag' },
+];
+
+// "Unser KI-Weg": the stages the series shows, in the order of consulting system v1.0
+// (kanal/beratungssystem/beratungssystem.md, section 5). No results are given away before an
+// episode is published; when one is, add `episode: { title, url }` to its stage.
+export type KiStage = {
+  label: string; title: string; text: string; episode?: { title: string; url: string };
+};
+
+export const kiWeg: KiStage[] = [
+  { label: 'Phase 1 bis 3', title: 'Wo steht der Betrieb?', text: 'Wir lassen uns genau ansehen: Abläufe, Daten, Programme, und wo heute im Büro die meiste Zeit verloren geht.' },
+  { label: 'Phase 4', title: 'Wo lohnt sich KI, und wo nicht?', text: 'Aus den Ideen wird ein Fahrplan. Die Geschäftsführung entscheidet schriftlich, was zuerst kommt und was nicht.' },
+  { label: 'Phase 5', title: 'Was darf das Team mit KI?', text: 'Klare Regeln für alle im Betrieb, eine Grundschulung und ein Weg, Bedenken zu melden.' },
+  { label: 'Freigabe 6.0 und Pilot', title: 'Der erste Fall: das Postfach', text: 'Ein kleiner, befristeter Test mit echten Mails. Vorher steht fest, ab wann er als Erfolg zählt.' },
+  { label: 'Phase 7 bis 9', title: 'Vom Test in den Alltag', text: 'Wenn der Test trägt: ein stabiles System, Schulung für alle, die damit arbeiten, und ein begleiteter Start.' },
+  { label: 'Phase 10', title: 'Was bringt es wirklich?', text: 'Wir prüfen regelmäßig Nutzen, Kosten und Fehler. Dann kommt der nächste Fall an die Reihe.' },
 ];

@@ -67,7 +67,7 @@ import { stats, services, process, people, history } from '../data/site';
       <ul class="people people--compact" style="list-style: none; margin: 0; padding: 0;">
         {people.map((p) => (
           <li class="person">
-            <Photo ratio="11" person badge="KI" hint="" alt={p.photoAlt} />
+            <Photo ratio="11" person badge="KI" hint="" src={p.photo} position="50% 20%" alt={p.photoAlt} />
             <span><span class="person__name">{p.name}</span><br /><span class="person__role">{p.role}</span></span>
           </li>
         ))}
