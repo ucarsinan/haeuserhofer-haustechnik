@@ -1,0 +1,13 @@
+---
+// Photo slot with mandatory AI label. Without src it renders a placeholder that describes the planned motif.
+interface Props { alt: string; src?: string; caption?: string; ratio?: '32' | '43' | '11' | '45'; person?: boolean; class?: string; hint?: string; badge?: string; position?: string; eager?: boolean }
+const { alt, src, caption, ratio = '32', person = false, class: cls, hint, badge, position, eager = false } = Astro.props;
+const label = badge ?? (person ? 'KI-GENERIERT · DEMO-FIRMA' : 'KI-GENERIERT');
+---
+<figure class:list={['photo', cls]}>
+  <div class:list={['photo__frame', { 'photo__frame--43': ratio === '43', 'photo__frame--11': ratio === '11', 'photo__frame--45': ratio === '45' }]}>
+    {src ? <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" style={position ? `object-position: ${position}` : undefined} /> : <div role="img" aria-label={alt} class="photo__hint">{hint ?? 'Foto folgt'}</div>}
+    <span class="photo__ki">{label}</span>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

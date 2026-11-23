@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { people, departments } from '../data/site';
+const total = departments.reduce((n, d) => n + d.count, 0);
+---
+<Base title="Team" description="46 Beschäftigte in Büro, Montage, Kundendienst, Werkstatt, Lager und IT, dazu vier Auszubildende.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <p class="label">Team</p>
+      <h1 class="h1 h1--page" id="title">Die Leute hinter der Anlage</h1>
+      <p class="lead">{total} Beschäftigte, davon 4 Auszubildende. Viele sind seit Jahrzehnten dabei. Hier stellen sich einige vor.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Personen">
+    <div class="wrap">
+      <ul class="people people--lead" style="list-style: none; margin: 0; padding: 0;">
+        {people.slice(0, 2).map((p) => (
+          <li class="person">
+            <Photo ratio="43" person src={p.photo} position="50% 25%" alt={p.photoAlt} />
+            <span class="person__since">{p.since}</span>
+            <span><span class="person__name">{p.name}</span><br /><span class="person__role">{p.role}</span></span>
+            <p class="person__text">{p.text}</p>
+          </li>
+        ))}
+      </ul>
+      <ul class="people people--rest" style="list-style: none; margin: 40px 0 0; padding: 0;">
+        {people.slice(2).map((p) => (
+          <li class="person">
+            <Photo ratio="45" person src={p.photo} position="50% 20%" alt={p.photoAlt} />
+            <span class="person__since">{p.since}</span>
+            <span><span class="person__name">{p.name}</span><br /><span class="person__role">{p.role}</span></span>
+            <p class="person__text">{p.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="prose" style="margin-top: 32px; font-size: 14px">Alle Personen auf dieser Seite sind frei erfunden. Ihre Gesichter sind KI-generiert und ähneln keiner echten Person.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="abteilungen">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-4"><SectionHead id="abteilungen" label="Abteilungen" title="Wer was macht" /></div>
+        <div class="col-7-off table-wrap">
+          <table class="table">
+            <thead><tr><th scope="col">Bereich</th><th scope="col">Personen</th></tr></thead>
+            <tbody>
+              {departments.map((d) => <tr><td>{d.name}</td><td class="num">{d.count}</td></tr>)}
+              <tr><td><b>Gesamt</b></td><td class="num">{total}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

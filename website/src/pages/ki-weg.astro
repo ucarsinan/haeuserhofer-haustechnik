@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Photo from '../components/Photo.astro';
+import { kiWeg, site } from '../data/site';
+---
+<Base title="Unser KI-Weg" description="Wie Häuserhofer Schritt für Schritt KI einführt. Jede Etappe zeigt eine Folge der YouTube-Serie von Sinan Uçar.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-6">
+          <p class="label">Unser KI-Weg</p>
+          <h1 class="h1 h1--page" id="title">KI im Betrieb, Schritt für Schritt</h1>
+          <p class="lead">Wir führen KI nicht auf einen Schlag ein, sondern in festen Etappen. Jede endet mit einer Entscheidung. Den ganzen Weg zeigt die YouTube-Serie von Sinan Uçar.</p>
+        </div>
+        <Photo class="col-6-off" ratio="32" src="/images/werkbank-1200.webp" position="55% 40%" person caption="Halle · Julia und Werner Häuserhofer an der Werkbank" alt="Julia und Werner Häuserhofer besprechen an der Werkbank in der Halle ausgedruckte Unterlagen, daneben ein Laptop, Kupferfittings und eine Rohrzange. KI-generiert" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="etappen">
+    <div class="wrap">
+      <SectionHead id="etappen" label="Etappen" title="So gehen wir vor" lead="Die Reihenfolge steht fest. Was dabei herauskommt, erfahren Sie in der jeweiligen Folge." />
+      <ol class="steps kiweg">
+        {kiWeg.map((s) => (
+          <li>
+            <div>
+              <span class="step__meta kiweg__label">{s.label}</span>
+              <b>{s.title}</b>
+              <span class="step__text">{s.text}</span>
+              {s.episode
+                ? <a class="link-arrow kiweg__link" href={s.episode.url} rel="noopener noreferrer">{s.episode.title} <span aria-hidden="true">→</span></a>
+                : <span class="step__meta">Folge in Vorbereitung</span>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section--band" aria-labelledby="dahinter">
+    <div class="wrap">
+      <SectionHead id="dahinter" label="Das Vorgehen dahinter" title="Erfundene Firma, echtes Vorgehen" lead="Häuserhofer gibt es nicht. Das Vorgehen in der Serie ist das Beratungssystem von Fil & Muz, mit allen Phasen und Entscheidungen." />
+      <p style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 24px;">
+        <a class="link-arrow" href={`${site.operatorUrl}/vorgehen`}>Das Vorgehen auf filandmuz.com <span aria-hidden="true">→</span></a>
+        <a class="link-arrow" href={site.channelUrl} rel="noopener noreferrer">Zum YouTube-Kanal <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </section>
+</Base>

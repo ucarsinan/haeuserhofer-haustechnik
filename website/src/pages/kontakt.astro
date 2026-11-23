@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import { site } from '../data/site';
+---
+<Base title="Kontakt" description="Häuserhofer ist eine Demo-Firma. Für echte Anfragen zu KI im eigenen Betrieb: Fil & Muz.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <p class="label">Kontakt</p>
+      <h1 class="h1 h1--page" id="title">Hier gibt es keine Telefonnummer.</h1>
+      <p class="lead">Die Häuserhofer Haustechnik GmbH ist eine erfundene Firma. Sie gehört zum YouTube-Kanal {site.channelName}. Dort zeigen wir Folge für Folge, wie ein Handwerksbetrieb wie dieser Schritt für Schritt KI einführt.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Kontaktmöglichkeiten">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-7"><Disclaimer /></div>
+        <div class="col-5">
+          <dl class="facts">
+            <div><dt>Adresse</dt><dd>keine, der Ort ist erfunden</dd></div>
+            <div><dt>Telefon</dt><dd>keine Nummer, damit niemand echte Aufträge vergibt</dd></div>
+            <div><dt>Formular</dt><dd>keins, wir sammeln keine Daten</dd></div>
+            <div><dt>Betreiber</dt><dd>Fil &amp; Muz, Sinan Uçar</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

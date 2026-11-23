@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { nav, site } from '../data/site';
+
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+const fullTitle = title === 'Start' ? `Heizung, Wärmepumpe, Bad | ${site.titleSuffix}` : `${title} | ${site.titleSuffix}`;
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={`${description} Demo-Firma mit fiktiven Daten.`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={`${description} Demo-Firma mit fiktiven Daten.`} />
+    <meta name="theme-color" content="#13294b" />
+  </head>
+  <body>
+    <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+    <div class="demobar" role="note" aria-label="Hinweis Demo-Firma">
+      <div class="wrap">
+        <p><span class="demobar__tag">DEMO</span> · Fiktive Firma, fiktive Daten, KI-generierte Personen. Teil des YouTube-Kanals {site.channelName}. <a href={site.channelUrl}>Zum Kanal</a></p>
+      </div>
+    </div>
+    <header class="header">
+      <div class="wrap">
+        <Logo />
+        <nav class="nav-desktop" aria-label="Hauptnavigation">
+          <ul>
+            {nav.map((item) => <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+        <details class="nav-mobile">
+          <summary aria-label="Menü">
+            <svg class="icon-open" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+            <svg class="icon-close" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg>
+          </summary>
+          <nav class="nav-mobile__panel" aria-label="Hauptnavigation mobil">
+            <ul>
+              {nav.map((item) => <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}<span aria-hidden="true">→</span></a></li>)}
+            </ul>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="inhalt">
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        <div class="stack">
+          <Logo />
+          <p>Meisterbetrieb für Heizung, Sanitär, Lüftung und Wärmepumpen. Seit 1987.</p>
+        </div>
+        <div class="footer__legal">
+          <p><b>Die Häuserhofer Haustechnik GmbH existiert nicht.</b> Alle Personen, Zahlen und Inhalte sind erfunden. Gesichter und Stimmen sind KI-generiert. Ähnlichkeiten mit echten Firmen oder Personen sind nicht beabsichtigt.</p>
+          <p>Betreiber dieser Demo-Seite: Fil &amp; Muz, Sinan Uçar. <a href={site.imprintUrl}>Impressum</a> · <a href={site.privacyUrl}>Datenschutz</a></p>
+          <p>Diese Seite setzt keine Cookies und nutzt kein Tracking.</p>
+        </div>
+        <nav aria-label="Fußnavigation">
+          <ul>
+            {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

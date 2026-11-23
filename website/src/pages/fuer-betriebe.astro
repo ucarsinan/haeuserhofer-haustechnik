@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+---
+<Base title="Für Betriebe" description="Vormontierte Hydraulik-Pakete H1 und H2 für Luft-Wasser-Wärmepumpen und Ersatzteile für andere Handwerksbetriebe.">
+  <section class="page-hero" aria-labelledby="title">
+    <div class="wrap">
+      <p class="label">Für Betriebe</p>
+      <h1 class="h1 h1--page" id="title">Hydraulik-Pakete aus unserer Werkstatt</h1>
+      <p class="lead">Seit 2018 montieren wir in der eigenen Werkstatt Hydraulik-Module für Luft-Wasser-Wärmepumpen vor. Rund 35 andere Heizungsbetriebe beziehen sie bei uns. Das spart auf der Baustelle Zeit.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pakete">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="spec col-7">
+          <p class="label label--on-navy">Pakete · H1 / H2</p>
+          <h2 class="h3" id="pakete">Vormontiert, geprüft, geliefert</h2>
+          <p>Zwei Grundvarianten, H1 und H2. Sonderwünsche stimmen wir mit der Werkstatt ab.</p>
+          <dl>
+            <div><dt>VARIANTEN</dt><dd>H1 und H2</dd></div>
+            <div><dt>PRÜFUNG</dt><dd>eigener Prüfstand</dd></div>
+            <div><dt>LIEFERUNG</dt><dd>eigener Transporter</dd></div>
+            <div><dt>BEZIEHER</dt><dd>rund 35 Betriebe</dd></div>
+          </dl>
+        </div>
+        <Photo class="col-5" ratio="43" caption="Werkstatt · Prüfstand für Hydraulik-Pakete" alt="Platzhalter Foto: Werkstatt in der Halle mit Werkbank und Prüfstand, ein vormontiertes Hydraulik-Paket mit Rohren und Pumpe, KI-generiert" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ablauf">
+    <div class="wrap">
+      <SectionHead id="ablauf" label="Bestellung" title="So läuft eine Bestellung" />
+      <ol class="steps steps--row">
+        <li><div><b>Anfrage</b><span class="step__text">Sie schicken uns Ihre Anlage und die gewünschte Variante per E-Mail.</span></div></li>
+        <li><div><b>Variante prüfen</b><span class="step__text">Die Werkstatt prüft H1 oder H2 und Ihre Sonderwünsche.</span></div></li>
+        <li><div><b>Montage und Prüfung</b><span class="step__text">Wir montieren das Paket vor und testen es auf dem Prüfstand.</span></div></li>
+        <li><div><b>Lieferung</b><span class="step__text">Wir liefern mit unserem eigenen Transporter.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ersatzteile">
+    <div class="wrap">
+      <div class="grid-12">
+        <div class="col-6">
+          <div class="service__title"><span class="icon"><Icon name="box" /></span><p class="label" style="margin: 0">Ersatzteile</p></div>
+          <h2 class="h2" id="ersatzteile">Ersatzteile aus unserem Lager</h2>
+          <p class="lead">Rund 2.800 Artikel im Lager. Für Stammkunden und andere Betriebe, auf Anfrage per Telefon oder E-Mail. Einen Online-Shop haben wir nicht.</p>
+        </div>
+        <div class="col-6-off">
+          <dl class="facts">
+            <div><dt>Lager</dt><dd>ca. 2.800 Artikel</dd></div>
+            <div><dt>Bestellung</dt><dd>Telefon oder E-Mail</dd></div>
+            <div><dt>Abholung</dt><dd>Ausgabe in der Halle</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Hinweis">
+    <div class="wrap">
+      <p class="prose" style="font-size: 15px">Häuserhofer ist eine Demo-Firma. Bestellungen sind nicht möglich.</p>
+    </div>
+  </section>
+</Base>
